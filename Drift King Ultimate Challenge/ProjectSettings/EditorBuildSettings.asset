@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 678d14bc71e492e43940481343e703cb
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: da9626f994320c64aaead7ed979da715
+  - enabled: 1
+    path: Assets/Scenes/LevelUltima.unity
+    guid: 12a60203a59a9b647bb52ad044105233
+  - enabled: 1
+    path: Assets/Scenes/ClimberTrack.unity
+    guid: dfdb37b4616b4407fb246249e3501d40
+  - enabled: 1
+    path: Assets/Scenes/SpeederTrack.unity
+    guid: 0f0a19c42ef1f242d894f65e11442ef7
   m_configObjects: {}
