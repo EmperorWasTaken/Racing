@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: da9626f994320c64aaead7ed979da715
   - enabled: 1
+    path: Assets/Scenes/TheLordsRoad.unity
+    guid: 2b2e81f7d75087740986f6d61745bda4
+  - enabled: 1
     path: Assets/Scenes/LevelUltima.unity
     guid: 12a60203a59a9b647bb52ad044105233
   - enabled: 1

@@ -20,7 +20,7 @@ public class SceneSelectLevel : MonoBehaviour
                 SceneManager.LoadScene("SpeederTrack");
                 break;
             case "Track 4":
-                SceneManager.LoadScene("LevelUltima");
+                SceneManager.LoadScene("TheLordsRoad");
                 break;
             case "Return":
                 SceneManager.LoadScene(0);
