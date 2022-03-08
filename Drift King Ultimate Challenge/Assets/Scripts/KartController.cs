@@ -13,9 +13,11 @@ public class KartController : MonoBehaviour
    public Transform kartModel;
    public Transform kartNormal;
    public Rigidbody sphere;
-   
-   float speed, currentSpeed;
-   float rotate, currentRotate;
+
+   private float _speed;
+   private float _currentSpeed;
+   private float _rotate;
+   private float _currentRotate;
 
    [Header("Parameters")]
    public float acceleration = 30f;
@@ -35,16 +37,19 @@ public class KartController : MonoBehaviour
 
    public void ApplyAcceleration(float input)
    {
-      speed = acceleration * input;
-      currentSpeed = Mathf.SmoothStep(currentSpeed, speed, Time.deltaTime * 12f);
-      speed = 0f;
-      currentRotate = Mathf.Lerp(currentRotate, rotate, Time.deltaTime * 4f);
-      rotate = 0f;
+      _speed = acceleration * input;
+      _currentSpeed = Mathf.SmoothStep(_currentSpeed, _speed, Time.deltaTime * 12f);
+      _speed = 0f;
+      _currentRotate = Mathf.Lerp(_currentRotate, _rotate, Time.deltaTime * 4f);
+      _rotate = 0f;
    }
 
    public void AnimateKart(float input)
    {
-      kartModel.localEulerAngles = Vector3.Lerp(kartModel.localEulerAngles, new Vector3(0, 90 + (input * 15), kartModel.localEulerAngles.z), .2f);
+      kartModel.localEulerAngles = Vector3.Lerp(
+         kartModel.localEulerAngles,
+         new Vector3(0, 90 + (input * 15),
+            kartModel.localEulerAngles.z), .2f);
       
       frontWheels.localEulerAngles = new Vector3(0, (input * 15), frontWheels.localEulerAngles.z);
       frontWheels.localEulerAngles += new Vector3(0, 0, sphere.velocity.magnitude / 2);
@@ -62,7 +67,7 @@ public class KartController : MonoBehaviour
    
    public void FixedUpdate()
    {
-      sphere.AddForce(-kartModel.transform.right * currentSpeed, ForceMode.Acceleration);
+      sphere.AddForce(-kartModel.transform.right * _currentSpeed, ForceMode.Acceleration);
 
       //Gravity
       sphere.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
@@ -71,7 +76,7 @@ public class KartController : MonoBehaviour
       transform.position = sphere.transform.position - new Vector3(0, 0.4f, 0);
 
       //Steering
-      transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, transform.eulerAngles.y + currentRotate, 0), Time.deltaTime * 5f);
+      transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, transform.eulerAngles.y + _currentRotate, 0), Time.deltaTime * 5f);
       
       Physics.Raycast(transform.position + (transform.up*.1f), Vector3.down, out RaycastHit hitOn, 1.1f,layerMask);
       Physics.Raycast(transform.position + (transform.up * .1f)   , Vector3.down, out RaycastHit hitNear, 2.0f, layerMask);
@@ -86,7 +91,7 @@ public class KartController : MonoBehaviour
       int steerDirection = steeringSignal > 0 ? 1 : -1;
       float steeringStrength = Mathf.Abs(steeringSignal);
       
-      rotate = (steering * steerDirection) * steeringStrength;
+      _rotate = (steering * steerDirection) * steeringStrength;
       AnimateKart(steeringSignal);
    }
 

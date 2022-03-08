@@ -7,31 +7,27 @@ using UnityEngine;
 
 public class KartAgent : Agent
 {
-   public CheckpointManager _checkpointManager;
+   public CheckpointManager checkpointManager;
    private KartController _kartController;
    
-   //called once at the start
    public override void Initialize()
    {
       _kartController = GetComponent<KartController>();
    }
    
-   //Called each time it has timed-out or has reached the goal
    public override void OnEpisodeBegin()
    {
-      _checkpointManager.ResetCheckpoints();
+      checkpointManager.ResetCheckpoints();
       _kartController.Respawn();
    }
 
    #region Behaviour
 
-      //Collecting extra Information that isn't picked up by the RaycastSensors
       public override void CollectObservations(VectorSensor sensor)
       {
          
       }
 
-      //Processing the actions received
       public override void OnActionReceived(ActionBuffers actions)
       {
          var input = actions.ContinuousActions;
@@ -39,7 +35,6 @@ public class KartAgent : Agent
          _kartController.Steer(input[0]);
       }
       
-      //For manual testing with human input, the actionsOut defined here will be sent to OnActionRecieved
       public override void Heuristic(in ActionBuffers actionsOut)
       {
          var action = actionsOut.ContinuousActions;
