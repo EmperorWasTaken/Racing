@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -25,7 +26,9 @@ public class KartAgent : Agent
 
       public override void CollectObservations(VectorSensor sensor)
       {
-         
+         Vector3 diff = checkpointManager.nextCheckPointToReach.transform.position - transform.position;
+         sensor.AddObservation(diff / 20);
+         AddReward(-0.001f);
       }
 
       public override void OnActionReceived(ActionBuffers actions)
